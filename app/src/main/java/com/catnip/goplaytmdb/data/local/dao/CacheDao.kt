@@ -10,7 +10,7 @@ Github : https://github.com/hermasyp
 @Dao
 interface CacheDao {
     @Query("SELECT * FROM cache_table WHERE id == :id LIMIT 1")
-    suspend fun getCacheById(id : String?): CacheEntity?
+    suspend fun getCacheById(id : String): CacheEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addCache(cache: CacheEntity): Long
