@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Goplay-tmdb</string>
+
+    <string name="message_error_no_internet">Something is wrong with internet connection\nMake sure you have an Internet Connection and try again.</string>
+    <string name="message_error_unknown">Something is wrong when fetch data\nPlease try again</string>
+    <string name="message_error_no_result">No Result</string>
 </resources>
