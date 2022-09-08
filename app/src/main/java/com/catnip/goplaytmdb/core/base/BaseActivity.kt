@@ -47,4 +47,8 @@ abstract class BaseActivity<B : ViewBinding, VM : ViewModel>(
         onBackPressed()
         return super.onSupportNavigateUp()
     }
+
+    fun showOnDevelopmentToast(){
+        Toast.makeText(this, "Still on Development", Toast.LENGTH_SHORT).show()
+    }
 }
