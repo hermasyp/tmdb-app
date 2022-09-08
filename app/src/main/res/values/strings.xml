@@ -4,4 +4,11 @@
     <string name="message_error_no_internet">Something is wrong with internet connection\nMake sure you have an Internet Connection and try again.</string>
     <string name="message_error_unknown">Something is wrong when fetch data\nPlease try again</string>
     <string name="message_error_no_result">No Result</string>
+    <string name="title_section_now_playing">Now Playing</string>
+    <string name="title_section_upcoming">Upcoming Movies</string>
+    <string name="title_section_top_rated">Top Rated</string>
+    <string name="title_section_popular">Popular</string>
+    <string name="text_add_to_list">My List</string>
+    <string name="play">Play</string>
+    <string name="info">Info</string>
 </resources>
