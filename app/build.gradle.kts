@@ -113,6 +113,6 @@ dependencies {
     androidTestImplementation(Libraries.androidxTestCore)
     androidTestImplementation(Libraries.androidxTestCoreKtx)
 
-    //time utils library
-    implementation(Libraries.timeAgo)
+    //ui libs
+    implementation(Libraries.shimmer)
 }

@@ -38,6 +38,7 @@ object Libraries {
         const val androidTestRules = "1.1.0"
         const val koin = "3.2.0"
         const val room = "2.4.3"
+        const val shimmer = "0.5.0"
 
     }
     //android library
@@ -69,7 +70,7 @@ object Libraries {
 
     //ui libs
     const val paging = "androidx.paging:paging-runtime:${Versions.jetpackPaging}"
-    const val timeAgo = "com.github.marlonlom:timeago:${Versions.timeAgo}"
+    const val shimmer = "com.facebook.shimmer:shimmer:${Versions.shimmer}"
 
     //coil
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koin}"
