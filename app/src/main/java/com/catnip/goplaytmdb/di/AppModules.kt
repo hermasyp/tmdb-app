@@ -8,9 +8,14 @@ import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSource
 import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSourceImpl
 import com.catnip.goplaytmdb.data.repository.MovieRepository
 import com.catnip.goplaytmdb.data.repository.MovieRepositoryImpl
+import com.catnip.goplaytmdb.domain.usecases.GetHeaderDataUseCase
+import com.catnip.goplaytmdb.domain.usecases.GetSectionDataUseCase
+import com.catnip.goplaytmdb.presentation.ui.home.HomeViewModel
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
@@ -44,12 +49,13 @@ object AppModules {
     }
 
     private val useCase = module {
-
+        single { GetSectionDataUseCase(get(),Dispatchers.IO) }
+        single { GetHeaderDataUseCase(get(),Dispatchers.IO) }
 
     }
 
     private val viewModel = module {
-
+        viewModelOf(::HomeViewModel)
     }
 
     private val common = module {
