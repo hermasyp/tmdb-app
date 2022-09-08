@@ -8,12 +8,10 @@ data class MovieResponse(
     val adult: Boolean?,
     @SerializedName("backdrop_path")
     val backdropPath: String?,
-    @SerializedName("belongs_to_collection")
-    val belongsToCollection: Any?,
     @SerializedName("budget")
     val budget: Int?,
     @SerializedName("genres")
-    val genres: List<GenreResponse?>?,
+    val genres: List<GenreResponse>?,
     @SerializedName("homepage")
     val homepage: String?,
     @SerializedName("id")

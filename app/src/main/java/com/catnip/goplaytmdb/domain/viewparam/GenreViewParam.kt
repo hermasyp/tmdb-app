@@ -1,4 +1,4 @@
-package com.catnip.goplaytmdb.presentation.viewparam
+package com.catnip.goplaytmdb.domain.viewparam
 
 
 data class GenreViewParam(

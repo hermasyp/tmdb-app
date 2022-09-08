@@ -2,6 +2,8 @@ package com.catnip.goplaytmdb.utils.ext
 
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.core.wrapper.ViewResource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -44,6 +46,6 @@ suspend fun <T> DataResource<T>.suspendSubscribe(
     when (this) {
         is DataResource.Success -> doOnSuccess?.invoke(this)
         is DataResource.Error -> doOnError?.invoke(this)
+        else -> {}
     }
 }
-
