@@ -7,8 +7,11 @@ import com.catnip.goplaytmdb.data.repository.MovieRepository
 import com.catnip.goplaytmdb.domain.mapper.MovieEntityMapper
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -28,11 +31,11 @@ class AddOrRemoveFavoriteMovieUseCase(
                 repository.addMovie(movie)
             return action.map { result ->
                 when (result) {
-                    is DataResource.Success -> ViewResource.Success(result.payload == true)
+                    is DataResource.Success -> ViewResource.Success(movie.isFavorited.not())
                     is DataResource.Error -> ViewResource.Error(result.exception)
                     is DataResource.Loading -> ViewResource.Loading()
                 }
-            }
+            }.onStart { emit(ViewResource.Loading()) }.onEach { delay(200) }
         } ?: throw IllegalStateException("Param Required")
     }
 

@@ -1,14 +1,18 @@
 package com.catnip.goplaytmdb.presentation.ui.movieinfo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import coil.load
 import com.catnip.goplaytmdb.databinding.BottomSheetMovieInfoBinding
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 import com.catnip.goplaytmdb.utils.CommonUtils
+import com.catnip.goplaytmdb.utils.ext.subscribe
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import org.koin.android.ext.android.inject
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -16,6 +20,7 @@ Github : https://github.com/hermasyp
  **/
 class MovieInfoBottomSheetDialog(private val movie: MovieViewParam) : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetMovieInfoBinding
+    private val viewModel: MovieInfoViewModel by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,11 +35,35 @@ class MovieInfoBottomSheetDialog(private val movie: MovieViewParam) : BottomShee
         super.onViewCreated(view, savedInstanceState)
         bindMovie(movie)
         observeData()
+        viewModel.checkIsMovieFavorited(movie)
     }
 
 
     private fun observeData() {
-        //todo : observe favorite status
+        viewModel.getFavoriteMovieResult().observe(this) {
+            it.subscribe(
+                doOnSuccess = { result ->
+                    binding.pbLoadingWatchlist.isVisible = false
+                    binding.ivWatchlist.isVisible = true
+                    movie.isFavorited = (result.payload == true)
+                    bindMovie(movie)
+                },
+                doOnError = {
+                    binding.pbLoadingWatchlist.isVisible = false
+                    binding.ivWatchlist.isVisible = true
+                },
+                doOnLoading = {
+                    binding.pbLoadingWatchlist.isVisible = true
+                    binding.ivWatchlist.isVisible = false
+                })
+        }
+        viewModel.isMovieFavoritedResult.observe(this) {
+            it.subscribe(
+                doOnSuccess = { result ->
+                    movie.isFavorited = (result.payload == true)
+                    bindMovie(movie)
+                })
+        }
     }
 
     private fun bindMovie(movie: MovieViewParam) {
@@ -62,8 +91,7 @@ class MovieInfoBottomSheetDialog(private val movie: MovieViewParam) : BottomShee
             CommonUtils.shareFilm(requireContext(), movie)
         }
         binding.llMyList.setOnClickListener {
-            //viewModel.addOrRemoveWatchlist(movie.isUserWatchlist, movie.id.toString())
-            //todo : add or remove watchlist
+            viewModel.addOrRemoveWatchlist(movie)
         }
     }
 }

@@ -154,7 +154,7 @@ class MovieRepositoryImpl(
 
     override suspend fun getMovieById(id: String): Flow<DataResource<MovieEntity?>> {
         return flow {
-            proceed { movieLocalDataSource.getMovieById(id) }
+            emit(proceed { movieLocalDataSource.getMovieById(id) })
         }
     }
 
@@ -194,7 +194,7 @@ class MovieRepositoryImpl(
 
     override suspend fun getUserMovies(): Flow<DataResource<List<MovieEntity>>> {
         return flow {
-            proceed { movieLocalDataSource.getUserMovies() }
+            emit(proceed { movieLocalDataSource.getUserMovies() })
         }
     }
 

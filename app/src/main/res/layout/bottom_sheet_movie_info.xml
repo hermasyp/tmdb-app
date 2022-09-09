@@ -126,14 +126,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_short_desc">
 
-            <ImageView
-                android:id="@+id/iv_watchlist"
+            <FrameLayout
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_rounded_icon"
-                android:padding="6dp"
-                android:src="@drawable/ic_add" />
+                android:layout_marginTop="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_watchlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_rounded_icon"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_add"
+                    tools:visibility="gone" />
+
+                <ProgressBar
+                    android:indeterminate="true"
+                    android:indeterminateTintMode="src_atop"
+                    android:indeterminateTint="@color/color_primary"
+                    android:id="@+id/pb_loading_watchlist"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_my_list"

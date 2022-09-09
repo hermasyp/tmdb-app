@@ -1,8 +1,6 @@
 package com.catnip.goplaytmdb.di
 
 import com.catnip.goplaytmdb.data.local.AppDatabase
-import com.catnip.goplaytmdb.data.local.dao.CacheDao
-import com.catnip.goplaytmdb.data.local.dao.MovieDao
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSource
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSourceImpl
 import com.catnip.goplaytmdb.data.local.datasource.MovieLocalDataSource
@@ -12,10 +10,10 @@ import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSource
 import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSourceImpl
 import com.catnip.goplaytmdb.data.repository.MovieRepository
 import com.catnip.goplaytmdb.data.repository.MovieRepositoryImpl
-import com.catnip.goplaytmdb.domain.usecases.GetHeaderDataUseCase
-import com.catnip.goplaytmdb.domain.usecases.GetSectionDataUseCase
-import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsViewModel
+import com.catnip.goplaytmdb.domain.usecases.*
 import com.catnip.goplaytmdb.presentation.ui.home.HomeViewModel
+import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsViewModel
+import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoViewModel
 import com.catnip.goplaytmdb.presentation.ui.mylist.MyListViewModel
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
@@ -53,19 +51,22 @@ object AppModules {
     }
 
     private val repository = module {
-        single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(),get()) }
+        single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(), get()) }
     }
 
     private val useCase = module {
         single { GetSectionDataUseCase(get(), Dispatchers.IO) }
         single { GetHeaderDataUseCase(get(), Dispatchers.IO) }
-
+        single { AddOrRemoveFavoriteMovieUseCase(get(), Dispatchers.IO) }
+        single { CheckIsFilmFavoritedUseCase(get(), Dispatchers.IO) }
+        single { GetFavoritedListMovieUseCase(get(), Dispatchers.IO) }
     }
 
     private val viewModel = module {
         viewModelOf(::HomeFeedsViewModel)
         viewModelOf(::HomeViewModel)
         viewModelOf(::MyListViewModel)
+        viewModelOf(::MovieInfoViewModel)
     }
 
     private val common = module {
