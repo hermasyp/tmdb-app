@@ -24,6 +24,6 @@ object MovieResponseMapper : ViewParamMapper<MovieResponse, MovieViewParam> {
         title = dataObject?.title.orEmpty(),
         voteAverage = dataObject?.voteAverage ?: -1.0,
         voteCount = dataObject?.voteCount ?: -1,
-        posterPath = dataObject?.posterPath.orEmpty()
+        posterPath = dataObject?.posterPath.orEmpty(),
     )
 }

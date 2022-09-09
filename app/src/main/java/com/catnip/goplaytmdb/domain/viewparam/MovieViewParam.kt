@@ -18,7 +18,8 @@ data class MovieViewParam(
     val status: String,
     val title: String,
     val voteAverage: Double,
-    val voteCount: Int
+    val voteCount: Int,
+    val isFavorited : Boolean = false
 ){
     fun getFullPosterPath() : String = Constants.IMAGE_BASE_URL + posterPath
     fun getFullBackdropPath() : String = Constants.IMAGE_BASE_URL + backdropPath

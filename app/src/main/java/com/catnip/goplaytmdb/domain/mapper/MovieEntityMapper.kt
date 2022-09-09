@@ -25,7 +25,8 @@ object MovieEntityMapper : DataMapper<MovieEntity, MovieViewParam> {
             title = dataObject?.title.orEmpty(),
             voteAverage = dataObject?.voteAverage ?: -1.0,
             voteCount = dataObject?.voteCount ?: -1,
-            posterPath = dataObject?.posterPath.orEmpty()
+            posterPath = dataObject?.posterPath.orEmpty(),
+            isFavorited = dataObject?.isFavorited ?: false
         )
 
     override fun toDataObject(viewParam: MovieViewParam?): MovieEntity =
@@ -44,6 +45,7 @@ object MovieEntityMapper : DataMapper<MovieEntity, MovieViewParam> {
             title = viewParam?.title.orEmpty(),
             voteAverage = viewParam?.voteAverage ?: -1.0,
             voteCount = viewParam?.voteCount ?: -1,
-            posterPath = viewParam?.posterPath.orEmpty()
+            posterPath = viewParam?.posterPath.orEmpty(),
+            isFavorited = viewParam?.isFavorited ?: false
         )
 }
