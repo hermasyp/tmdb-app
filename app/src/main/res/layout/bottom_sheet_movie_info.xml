@@ -3,59 +3,65 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="400dp">
+    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_header_poster"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_header_poster"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="V,2:1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/iv_header_movie"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
+            android:layout_height="wrap_content"
+            android:clipToPadding="true"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic[8]" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_gradient_top_to_bottom"
-            app:layout_constraintHeight_percent="0.3"
-            app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/iv_header_movie"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="V,2:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic[8]" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@drawable/bg_gradient_bottom_to_top"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.5" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_gradient_top_to_bottom"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_gradient_bottom_to_top"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cl_header_poster"
-        app:layout_constraintVertical_bias="1">
+        android:layout_marginTop="83dp"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="@+id/cv_header_poster">
 
         <ImageView
             android:id="@+id/iv_poster"
             android:layout_width="0dp"
-            android:layout_height="170dp"
+            android:layout_height="140dp"
             android:background="@drawable/bg_poster"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="@id/guideline_top"
             app:layout_constraintDimensionRatio="H,1.4:1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,11 +76,12 @@
             android:textColor="@color/text_color_primary"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:layout_constraintLeft_toRightOf="@id/iv_poster"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_poster"
+            app:layout_constraintLeft_toRightOf="@+id/iv_poster"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8"
             tools:text="Avengers : Battle of Ultron" />
-
 
         <TextView
             android:id="@+id/tv_additional_info"
@@ -86,7 +93,7 @@
             android:maxLines="2"
             android:textColor="@color/text_color_secondary"
             android:textSize="12sp"
-            app:layout_constraintLeft_toRightOf="@id/iv_poster"
+            app:layout_constraintLeft_toRightOf="@+id/iv_poster"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_movie_title"
             tools:text="2018 \u2022 2h18m \u2022 R18" />
@@ -95,13 +102,12 @@
             android:id="@+id/tv_short_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:lineHeight="20sp"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintLeft_toRightOf="@id/iv_poster"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_additional_info"
             tools:targetApi="p"
@@ -118,7 +124,7 @@
             app:layout_constraintEnd_toStartOf="@+id/ll_share"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_top">
+            app:layout_constraintTop_toBottomOf="@id/tv_short_desc">
 
             <ImageView
                 android:id="@+id/iv_watchlist"
@@ -151,7 +157,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/ll_my_list"
-            app:layout_constraintTop_toBottomOf="@id/guideline_top">
+            app:layout_constraintTop_toBottomOf="@id/tv_short_desc">
 
             <ImageView
                 android:layout_width="35dp"
@@ -173,13 +179,13 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_top"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/tv_short_desc" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

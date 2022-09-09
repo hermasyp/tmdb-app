@@ -1,15 +1,16 @@
 package com.catnip.goplaytmdb.presentation.ui.homefeeds
 
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.catnip.goplaytmdb.core.base.BaseFragment
 import com.catnip.goplaytmdb.databinding.FragmentHomeBinding
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
+import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoBottomSheetDialog
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeFeedsAdapter
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeHeaderViewHolder
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeSectionViewHolder
+import com.catnip.goplaytmdb.utils.CommonUtils
 import com.catnip.goplaytmdb.utils.ext.subscribe
 import org.koin.android.ext.android.inject
 
@@ -21,15 +22,15 @@ class HomeFeedsFragment :
     private val homeAdapter: HomeFeedsAdapter by lazy {
         HomeFeedsAdapter(headerClickListener = object : HomeHeaderViewHolder.HomeHeaderClickListener {
             override fun onShareClicked(movieViewParam: MovieViewParam) {
-                showOnDevelopmentToast()
+                CommonUtils.shareFilm(requireContext(),movieViewParam)
             }
             override fun onInfoClicked(movieViewParam: MovieViewParam) {
-                showOnDevelopmentToast()
+                openMovieInfo(movieViewParam)
             }
 
         }, homeSectionClickListener = object : HomeSectionViewHolder.HomeSectionClickListener {
             override fun onPosterClicked(movieViewParam: MovieViewParam) {
-                showOnDevelopmentToast()
+                openMovieInfo(movieViewParam)
             }
 
             override fun onShowMoreClicked(section: HomeUiModel.MovieSectionUIModel) {
@@ -42,6 +43,7 @@ class HomeFeedsFragment :
     private val recycledViewPool: RecyclerView.RecycledViewPool by lazy {
         RecyclerView.RecycledViewPool()
     }
+
 
 
     override fun initView() {
@@ -68,6 +70,10 @@ class HomeFeedsFragment :
 
     private fun handleFirstLoadError(){
 
+    }
+
+    private fun openMovieInfo(movieViewParam: MovieViewParam){
+        MovieInfoBottomSheetDialog(movieViewParam).show(childFragmentManager,null)
     }
 
     private fun initData() {

@@ -75,7 +75,6 @@ class HomeFeedsAdapter(
         return when (items.toList()[position].second) {
             is HomeUiModel.HeaderSectionUiModel -> R.layout.item_header_home
             is HomeUiModel.MovieSectionUIModel -> R.layout.item_section_movie
-            null -> throw IllegalStateException("Unknown view")
         }
     }
 
