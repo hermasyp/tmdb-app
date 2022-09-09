@@ -1,8 +1,12 @@
 package com.catnip.goplaytmdb.di
 
 import com.catnip.goplaytmdb.data.local.AppDatabase
+import com.catnip.goplaytmdb.data.local.dao.CacheDao
+import com.catnip.goplaytmdb.data.local.dao.MovieDao
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSource
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSourceImpl
+import com.catnip.goplaytmdb.data.local.datasource.MovieLocalDataSource
+import com.catnip.goplaytmdb.data.local.datasource.MovieLocalDataSourceImpl
 import com.catnip.goplaytmdb.data.network.MovieApiService
 import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSource
 import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSourceImpl
@@ -33,6 +37,7 @@ object AppModules {
 
     private val localModule = module {
         single { get<AppDatabase>().cacheDao() }
+        single { get<AppDatabase>().movieDao() }
         single { AppDatabase.create(androidContext()) }
     }
 
@@ -43,11 +48,12 @@ object AppModules {
 
     private val dataSource = module {
         single<MovieApiDataSource> { MovieApiDataSourceImpl(get()) }
+        single<MovieLocalDataSource> { MovieLocalDataSourceImpl(get()) }
         single<CacheDataSource> { CacheDataSourceImpl(get()) }
     }
 
     private val repository = module {
-        single<MovieRepository> { MovieRepositoryImpl(get(), get(), get()) }
+        single<MovieRepository> { MovieRepositoryImpl(get(), get(), get(),get()) }
     }
 
     private val useCase = module {

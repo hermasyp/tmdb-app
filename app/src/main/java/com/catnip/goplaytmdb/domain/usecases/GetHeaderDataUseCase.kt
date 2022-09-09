@@ -5,7 +5,7 @@ import com.catnip.goplaytmdb.core.base.BaseUseCase
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.core.wrapper.ViewResource
 import com.catnip.goplaytmdb.data.repository.MovieRepository
-import com.catnip.goplaytmdb.domain.mapper.MovieMapper
+import com.catnip.goplaytmdb.domain.mapper.MovieResponseMapper
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
 import com.catnip.goplaytmdb.presentation.model.HomeViewType
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +29,7 @@ class GetHeaderDataUseCase(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
                                 isLoading = true
                             )
                         )
@@ -40,7 +40,7 @@ class GetHeaderDataUseCase(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
                             )
                         )
                     )
@@ -51,7 +51,7 @@ class GetHeaderDataUseCase(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
                                 error = it.exception
                             )
                         )

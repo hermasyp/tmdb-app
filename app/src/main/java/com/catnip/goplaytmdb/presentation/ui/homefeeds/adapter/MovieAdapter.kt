@@ -74,7 +74,7 @@ class MovieAdapter(
 
         override fun bindView(item: MovieViewParam) {
             with(item) {
-                binding.ivPoster.load(item.posterPath)
+                binding.ivPoster.load(item.getFullPosterPath())
                 itemView.setOnClickListener { itemClick(this) }
             }
         }
@@ -87,7 +87,7 @@ class MovieAdapter(
 
         override fun bindView(item: MovieViewParam) {
             with(item) {
-                binding.ivPoster.load(item.posterPath)
+                binding.ivPoster.load(item.getFullPosterPath())
                 itemView.setOnClickListener { itemClick(this) }
             }
 

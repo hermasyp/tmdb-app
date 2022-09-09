@@ -2,10 +2,13 @@ package com.catnip.goplaytmdb.data.repository
 
 import android.util.Log
 import com.catnip.goplaytmdb.core.base.BaseRepository
+import com.catnip.goplaytmdb.core.exception.DatabaseExecutionFailedException
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.data.local.CacheKeyConstants
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSource
+import com.catnip.goplaytmdb.data.local.datasource.MovieLocalDataSource
 import com.catnip.goplaytmdb.data.local.entity.CacheEntity
+import com.catnip.goplaytmdb.data.local.entity.MovieEntity
 import com.catnip.goplaytmdb.data.network.datasource.MovieApiDataSource
 import com.catnip.goplaytmdb.data.network.model.response.MovieResponse
 import com.catnip.goplaytmdb.data.network.model.response.MoviesResponse
@@ -41,11 +44,22 @@ interface MovieRepository {
         key: String
     ): Flow<DataResource<MoviesResponse>>
 
-    suspend fun getMoviesData(viewType : String): Flow<DataResource<MoviesResponse>>
+    suspend fun getMoviesData(viewType: String): Flow<DataResource<MoviesResponse>>
+
+    //my list
+    suspend fun getMovieById(id: String): Flow<DataResource<MovieEntity?>>
+
+    suspend fun addMovie(movieEntity: MovieEntity): Flow<DataResource<Boolean>>
+
+    suspend fun removeMovie(movieEntity: MovieEntity): Flow<DataResource<Boolean>>
+
+    suspend fun getUserMovies(): Flow<DataResource<List<MovieEntity>>>
+
 }
 
 class MovieRepositoryImpl(
     private val cacheDataSource: CacheDataSource,
+    private val movieLocalDataSource: MovieLocalDataSource,
     private val apiDataSource: MovieApiDataSource,
     private val gson: Gson
 ) : MovieRepository, BaseRepository() {
@@ -102,7 +116,7 @@ class MovieRepositoryImpl(
         }
     }
 
-    override suspend fun getMoviesData(viewType : String): Flow<DataResource<MoviesResponse>> {
+    override suspend fun getMoviesData(viewType: String): Flow<DataResource<MoviesResponse>> {
         return localFirstNetworkResource(
             query = {
                 getCache(getCacheKey(viewType)).map {
@@ -122,7 +136,12 @@ class MovieRepositoryImpl(
                 it.collect { data ->
                     data.suspendSubscribe(
                         doOnSuccess = { result ->
-                            result.payload?.let { response -> saveCache(getCacheKey(viewType),response) }
+                            result.payload?.let { response ->
+                                saveCache(
+                                    getCacheKey(viewType),
+                                    response
+                                )
+                            }
                         },
                         doOnError = { error ->
                             Log.d("TAG", "invoke: error $error")
@@ -137,22 +156,73 @@ class MovieRepositoryImpl(
         )
     }
 
-    private fun getCacheKey(viewType: String) : String{
-        return when(viewType){
+    override suspend fun getMovieById(id: String): Flow<DataResource<MovieEntity?>> {
+        return flow {
+            proceed { movieLocalDataSource.getMovieById(id) }
+        }
+    }
+
+    override suspend fun addMovie(movieEntity: MovieEntity): Flow<DataResource<Boolean>> {
+        return flow {
+            emit(
+                try {
+                    val totalRowsAffected = movieLocalDataSource.addMovie(movieEntity)
+                    if (totalRowsAffected > 0) {
+                        DataResource.Success(true)
+                    } else {
+                        DataResource.Error(DatabaseExecutionFailedException())
+                    }
+                } catch (exception: Exception) {
+                    DataResource.Error(exception)
+                }
+            )
+        }
+    }
+
+    override suspend fun removeMovie(movieEntity: MovieEntity): Flow<DataResource<Boolean>> {
+        return flow {
+            emit(
+                try {
+                    val totalRowsAffected = movieLocalDataSource.removeMovie(movieEntity)
+                    if (totalRowsAffected > 0) {
+                        DataResource.Success(true)
+                    } else {
+                        DataResource.Error(DatabaseExecutionFailedException())
+                    }
+                } catch (exception: Exception) {
+                    DataResource.Error(exception)
+                }
+            )
+        }
+    }
+
+    override suspend fun getUserMovies(): Flow<DataResource<List<MovieEntity>>> {
+        return flow {
+            proceed { movieLocalDataSource.getUserMovies() }
+        }
+    }
+
+    private fun getCacheKey(viewType: String): String {
+        return when (viewType) {
             HomeViewType.SECTION_NOW_PLAYING -> CacheKeyConstants.NOW_PLAYING_CACHE_KEY
             HomeViewType.SECTION_POPULAR -> CacheKeyConstants.POPULAR_CACHE_KEY
             HomeViewType.SECTION_TOP_RATED -> CacheKeyConstants.TOP_RATED_CACHE_KEY
             HomeViewType.SECTION_UPCOMING -> CacheKeyConstants.UPCOMING_CACHE_KEY
-            else -> {""}
+            else -> {
+                ""
+            }
         }
     }
-    private suspend fun fetchMovies(viewType: String) : Flow<DataResource<MoviesResponse>>{
-        return when(viewType){
+
+    private suspend fun fetchMovies(viewType: String): Flow<DataResource<MoviesResponse>> {
+        return when (viewType) {
             HomeViewType.SECTION_NOW_PLAYING -> fetchNowPlayingMovie()
             HomeViewType.SECTION_POPULAR -> fetchPopularMovie()
             HomeViewType.SECTION_TOP_RATED -> fetchTopRatedMovie()
             HomeViewType.SECTION_UPCOMING -> fetchUpcomingMovie()
-            else -> {fetchNowPlayingMovie()}
+            else -> {
+                fetchNowPlayingMovie()
+            }
         }
     }
 

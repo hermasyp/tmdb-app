@@ -6,7 +6,7 @@ import com.catnip.goplaytmdb.core.base.BaseUseCase
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.core.wrapper.ViewResource
 import com.catnip.goplaytmdb.data.repository.MovieRepository
-import com.catnip.goplaytmdb.domain.mapper.MovieMapper
+import com.catnip.goplaytmdb.domain.mapper.MovieResponseMapper
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +31,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
-                                    ListMapper(MovieMapper).toViewParams(it.payload?.results),
+                                    ListMapper(MovieResponseMapper).toViewParams(it.payload?.results),
                                     isLoading = true
                                 )
                             )
@@ -43,7 +43,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
-                                    ListMapper(MovieMapper).toViewParams(it.payload?.results)
+                                    ListMapper(MovieResponseMapper).toViewParams(it.payload?.results)
                                 )
                             )
                         )
@@ -55,7 +55,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
-                                    ListMapper(MovieMapper).toViewParams(it.payload?.results),
+                                    ListMapper(MovieResponseMapper).toViewParams(it.payload?.results),
                                     error = it.exception
                                 )
                             )

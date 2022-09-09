@@ -45,7 +45,7 @@ class HomeHeaderViewHolder(
     }
     private fun bindMovie(movie : MovieViewParam?){
         movie?.let {
-            binding.ivHeaderMovie.load(movie.posterPath)
+            binding.ivHeaderMovie.load(movie.getFullPosterPath())
             binding.tvTitleMovie.text = movie.title
             binding.tvInfoHeader.setOnClickListener {
                 headerClickListener.onInfoClicked(movie)
