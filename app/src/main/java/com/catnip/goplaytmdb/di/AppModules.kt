@@ -1,6 +1,6 @@
 package com.catnip.goplaytmdb.di
 
-import com.catnip.goplaytmdb.data.local.CacheDatabase
+import com.catnip.goplaytmdb.data.local.AppDatabase
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSource
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSourceImpl
 import com.catnip.goplaytmdb.data.network.MovieApiService
@@ -32,8 +32,8 @@ object AppModules {
     )
 
     private val localModule = module {
-        single { get<CacheDatabase>().cacheDao() }
-        single { CacheDatabase.create(androidContext()) }
+        single { get<AppDatabase>().cacheDao() }
+        single { AppDatabase.create(androidContext()) }
     }
 
     private val networkModule = module {
