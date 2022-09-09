@@ -125,7 +125,6 @@ class MovieRepositoryImpl(
                             it.payload ?: MoviesResponse(0, listOf(), 0, 0)
                         }
                         else -> {
-                            Log.d("TAG", "invoke: error null movies")
                             MoviesResponse(0, listOf(), 0, 0)
                         }
                     }
@@ -137,10 +136,7 @@ class MovieRepositoryImpl(
                     data.suspendSubscribe(
                         doOnSuccess = { result ->
                             result.payload?.let { response ->
-                                saveCache(
-                                    getCacheKey(viewType),
-                                    response
-                                )
+                                saveCache(getCacheKey(viewType), response)
                             }
                         },
                         doOnError = { error ->

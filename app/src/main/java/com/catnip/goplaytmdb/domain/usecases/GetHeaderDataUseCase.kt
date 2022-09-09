@@ -23,13 +23,15 @@ class GetHeaderDataUseCase(
 
     override suspend fun execute(param: Param?): Flow<ViewResource<Pair<String, HomeUiModel>>> {
         return repository.getMoviesData(HomeViewType.SECTION_NOW_PLAYING).map {
+            val movies = it.payload?.results.orEmpty()
+            val randomMovie = if(movies.isNotEmpty()) movies.random() else null
             when (it) {
                 is DataResource.Loading -> {
                     ViewResource.Loading(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(randomMovie),
                                 isLoading = true
                             )
                         )
@@ -40,7 +42,7 @@ class GetHeaderDataUseCase(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(randomMovie)
                             )
                         )
                     )
@@ -51,7 +53,7 @@ class GetHeaderDataUseCase(
                         Pair(
                             HomeViewType.HEADER,
                             HomeUiModel.HeaderSectionUiModel(
-                                MovieResponseMapper.toViewParam(it.payload?.results?.random()),
+                                MovieResponseMapper.toViewParam(randomMovie),
                                 error = it.exception
                             )
                         )
