@@ -10,7 +10,9 @@ import com.catnip.goplaytmdb.data.repository.MovieRepository
 import com.catnip.goplaytmdb.data.repository.MovieRepositoryImpl
 import com.catnip.goplaytmdb.domain.usecases.GetHeaderDataUseCase
 import com.catnip.goplaytmdb.domain.usecases.GetSectionDataUseCase
+import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsViewModel
 import com.catnip.goplaytmdb.presentation.ui.home.HomeViewModel
+import com.catnip.goplaytmdb.presentation.ui.mylist.MyListViewModel
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -49,13 +51,15 @@ object AppModules {
     }
 
     private val useCase = module {
-        single { GetSectionDataUseCase(get(),Dispatchers.IO) }
-        single { GetHeaderDataUseCase(get(),Dispatchers.IO) }
+        single { GetSectionDataUseCase(get(), Dispatchers.IO) }
+        single { GetHeaderDataUseCase(get(), Dispatchers.IO) }
 
     }
 
     private val viewModel = module {
+        viewModelOf(::HomeFeedsViewModel)
         viewModelOf(::HomeViewModel)
+        viewModelOf(::MyListViewModel)
     }
 
     private val common = module {

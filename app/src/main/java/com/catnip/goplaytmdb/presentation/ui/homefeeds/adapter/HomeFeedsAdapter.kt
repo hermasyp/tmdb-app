@@ -1,4 +1,4 @@
-package com.catnip.goplaytmdb.presentation.ui.home.adapter
+package com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter
 
 import android.util.Log
 import android.view.ViewGroup
@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.catnip.goplaytmdb.R
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
 import com.catnip.goplaytmdb.presentation.model.HomeViewType
-import kotlin.math.log
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
-class HomeAdapter(
+class HomeFeedsAdapter(
     val headerClickListener: HomeHeaderViewHolder.HomeHeaderClickListener,
     val homeSectionClickListener: HomeSectionViewHolder.HomeSectionClickListener,
     val recycledViewPool: RecyclerView.RecycledViewPool

@@ -1,4 +1,4 @@
-package com.catnip.goplaytmdb.presentation.ui.home.adapter
+package com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
