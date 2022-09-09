@@ -9,8 +9,10 @@
     <string name="title_section_top_rated">Top Rated</string>
     <string name="title_section_popular">Popular</string>
     <string name="text_add_to_list">My List</string>
-    <string name="play">Play</string>
-    <string name="info">Info</string>
-    <string name="tab_home">Home</string>
-    <string name="tab_my_list">My List</string>
+    <string name="text_play">Play</string>
+    <string name="text_infp">Info</string>
+    <string name="title_tab_home">Home</string>
+    <string name="title_tab_my_list">My List</string>
+    <string name="text_share">Share</string>
+    <string name="text_my_list">My List</string>
 </resources>

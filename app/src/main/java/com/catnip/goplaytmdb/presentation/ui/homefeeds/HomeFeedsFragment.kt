@@ -20,14 +20,9 @@ class HomeFeedsFragment :
 
     private val homeAdapter: HomeFeedsAdapter by lazy {
         HomeFeedsAdapter(headerClickListener = object : HomeHeaderViewHolder.HomeHeaderClickListener {
-            override fun onMyListClicked(movieViewParam: MovieViewParam) {
+            override fun onShareClicked(movieViewParam: MovieViewParam) {
                 showOnDevelopmentToast()
             }
-
-            override fun onPlayMovieClicked(movieViewParam: MovieViewParam) {
-                showOnDevelopmentToast()
-            }
-
             override fun onInfoClicked(movieViewParam: MovieViewParam) {
                 showOnDevelopmentToast()
             }
@@ -64,13 +59,15 @@ class HomeFeedsFragment :
             it.subscribe(doOnSuccess = { result ->
                 result.payload?.let { data -> homeAdapter.addOrReplaceItem(data) }
             }, doOnError = { result ->
-                Log.d(HomeFeedsFragment::class.simpleName, "observeData: ${result.exception}")
                 result.payload?.let { data -> homeAdapter.addOrReplaceItem(data) }
             }, doOnLoading = { result ->
-                Log.d(HomeFeedsFragment::class.simpleName, "Loading")
                 result.payload?.let { data -> homeAdapter.addOrReplaceItem(data) }
             })
         }
+    }
+
+    private fun handleFirstLoadError(){
+
     }
 
     private fun initData() {

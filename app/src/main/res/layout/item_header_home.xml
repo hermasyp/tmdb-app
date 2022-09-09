@@ -23,7 +23,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_header_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -50,75 +51,52 @@
             android:layout_height="0dp"
             android:background="@drawable/bg_gradient_bottom_to_top"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHeight_percent="0.3" />
+            app:layout_constraintHeight_percent="0.4" />
 
-        <TextView
-            android:id="@+id/tv_title_movie"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
+            android:orientation="vertical"
             android:paddingHorizontal="16dp"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toTopOf="@+id/ll_btn_header"
-            tools:text="Iron Man" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ll_btn_header">
+
+            <TextView
+                android:id="@+id/tv_title_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Iron Man" />
+
+            <TextView
+                android:id="@+id/tv_genre_movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:textColor="@color/text_color_secondary"
+                android:textSize="12sp"
+                tools:text="Action,Scifi qwfq fnqioe qofnqwof nqw ofqwfj qowfj oiqwfioqjf oqwi qwoifj qwofj  foqwfoqwnfoiqw foqwfnqio  qow fjqwoif q wofnqwikf bnq qwiofqowiufnqwo qowfjqwoif jqo fqwi j nq ojno" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_btn_header"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="0dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
             <TextView
-                android:id="@+id/tv_add_to_watchlist_header"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:background="?selectableItemBackground"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="8dp"
-                android:text="@string/text_add_to_list"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                app:drawableTopCompat="@drawable/ic_add"
-                tools:drawableTop="@drawable/ic_add" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cv_play_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="24dp"
-                app:cardBackgroundColor="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="4dp"
-                    android:text="@string/play"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    app:drawableLeftCompat="@drawable/ic_play"
-                    app:drawableTint="@color/black"
-                    tools:drawableLeft="@drawable/ic_play"
-                    tools:drawableTint="@color/black" />
-            </androidx.cardview.widget.CardView>
-
-            <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_info_header"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -129,11 +107,30 @@
                 android:gravity="center"
                 android:paddingHorizontal="8dp"
                 android:paddingVertical="8dp"
-                android:text="@string/info"
+                android:text="@string/text_infp"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 app:drawableTopCompat="@drawable/ic_info"
                 tools:drawableTop="@drawable/ic_info" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_share"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="8dp"
+                android:text="@string/text_share"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:drawableTopCompat="@drawable/ic_share"
+                tools:drawableTop="@drawable/ic_share" />
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
