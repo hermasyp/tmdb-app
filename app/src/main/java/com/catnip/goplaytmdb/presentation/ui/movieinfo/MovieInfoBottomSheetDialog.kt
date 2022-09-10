@@ -1,7 +1,6 @@
 package com.catnip.goplaytmdb.presentation.ui.movieinfo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,10 @@ import org.koin.android.ext.android.inject
 Written with love by Muhammad Hermas Yuda Pamungkas
 Github : https://github.com/hermasyp
  **/
-class MovieInfoBottomSheetDialog(private val movie: MovieViewParam) : BottomSheetDialogFragment() {
+class MovieInfoBottomSheetDialog(
+    private val movie: MovieViewParam,
+    private val favoriteActionCallback: ((Boolean) -> Unit)? = null
+) : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetMovieInfoBinding
     private val viewModel: MovieInfoViewModel by inject()
 
@@ -47,6 +49,7 @@ class MovieInfoBottomSheetDialog(private val movie: MovieViewParam) : BottomShee
                     binding.ivWatchlist.isVisible = true
                     movie.isFavorited = (result.payload == true)
                     bindMovie(movie)
+                    favoriteActionCallback?.invoke(movie.isFavorited)
                 },
                 doOnError = {
                     binding.pbLoadingWatchlist.isVisible = false
