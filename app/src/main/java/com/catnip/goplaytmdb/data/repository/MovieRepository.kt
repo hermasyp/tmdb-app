@@ -3,6 +3,7 @@ package com.catnip.goplaytmdb.data.repository
 import android.util.Log
 import com.catnip.goplaytmdb.core.base.BaseRepository
 import com.catnip.goplaytmdb.core.exception.DatabaseExecutionFailedException
+import com.catnip.goplaytmdb.core.exception.NoInternetConnectionException
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.data.local.CacheKeyConstants
 import com.catnip.goplaytmdb.data.local.datasource.CacheDataSource
@@ -16,9 +17,8 @@ import com.catnip.goplaytmdb.presentation.model.HomeViewType
 import com.catnip.goplaytmdb.utils.ext.localFirstNetworkResource
 import com.catnip.goplaytmdb.utils.ext.suspendSubscribe
 import com.google.gson.Gson
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -140,8 +140,6 @@ class MovieRepositoryImpl(
                             }
                         },
                         doOnError = { error ->
-                            Log.d("TAG", "invoke: error $error")
-
                             error.exception?.let { e ->
                                 throw e
                             }
@@ -219,6 +217,11 @@ class MovieRepositoryImpl(
             else -> {
                 fetchNowPlayingMovie()
             }
+        }.retry {
+            delay(5000)
+            it is NoInternetConnectionException
+        }.catch {
+            emit(DataResource.Error(Exception(it)))
         }
     }
 

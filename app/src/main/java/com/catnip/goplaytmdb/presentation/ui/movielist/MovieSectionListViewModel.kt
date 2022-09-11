@@ -6,6 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.catnip.goplaytmdb.domain.usecases.GetMovieListBySectionUseCase
+import com.catnip.goplaytmdb.presentation.delegates.NetworkObserverDelegates
+import com.catnip.goplaytmdb.presentation.delegates.NetworkObserverDelegatesImpl
 import com.catnip.goplaytmdb.presentation.ui.movielist.adapter.MoviesBySectionPagingSource
 import com.catnip.goplaytmdb.presentation.ui.movielist.adapter.MoviesBySectionPagingSource.Companion.DEFAULT_PAGE_SIZE
 
@@ -15,7 +17,7 @@ Github : https://github.com/hermasyp
  **/
 class MovieSectionListViewModel(
     private val getMovieListBySectionUseCase: GetMovieListBySectionUseCase
-) : ViewModel() {
+) : ViewModel(), NetworkObserverDelegates by NetworkObserverDelegatesImpl() {
 
     fun getMoviesBySection(sectionType: String) = Pager(
         config = PagingConfig(pageSize = DEFAULT_PAGE_SIZE, enablePlaceholders = true),

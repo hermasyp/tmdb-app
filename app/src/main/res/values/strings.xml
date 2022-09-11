@@ -17,4 +17,6 @@
     <string name="text_my_list">My List</string>
     <string name="text_movie_list_empty">Your Movie list is Empty</string>
     <string name="text_button_retry">Retry</string>
+    <string name="text_snackbar_dismiss">Dismiss</string>
+    <string name="text_no_internet">No Internet Connection</string>
 </resources>

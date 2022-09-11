@@ -42,7 +42,6 @@ class HomeFeedsAdapter(
     )
 
     fun addOrReplaceItem(pairItem: Pair<String, HomeUiModel>) {
-        Log.d(this.javaClass.simpleName, "addOrReplaceItem: ${pairItem.first} ${pairItem.second.isLoading} ${pairItem.second.error}")
         if (items.containsKey(pairItem.first)) {
             items[pairItem.first] = pairItem.second
             notifyItemChanged(items.toList().indexOf(pairItem))

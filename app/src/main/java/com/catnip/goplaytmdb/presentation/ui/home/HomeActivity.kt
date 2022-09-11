@@ -6,9 +6,11 @@ import com.catnip.goplaytmdb.core.base.BaseActivity
 import com.catnip.goplaytmdb.databinding.ActivityHomeBinding
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsFragment
 import com.catnip.goplaytmdb.presentation.ui.mylist.MyListFragment
+import com.catnip.goplaytmdb.utils.NetworkStatus
 import org.koin.android.ext.android.inject
 
-class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(ActivityHomeBinding::inflate) {
+class HomeActivity :
+    BaseActivity<ActivityHomeBinding, HomeViewModel>(ActivityHomeBinding::inflate) {
     override val viewModel: HomeViewModel by inject()
 
 
@@ -19,6 +21,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(ActivityHom
     override fun initView() {
         setupFragment()
     }
+
     private fun setupFragment() {
         // delete all fragment in fragment manager first
         for (fragment in supportFragmentManager.fragments) {
@@ -40,6 +43,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding,HomeViewModel>(ActivityHom
                 else -> {
                     showFragment(myListFragment)
                     true
+                }
+            }
+        }
+    }
+
+    override fun observeData() {
+        super.observeData()
+        viewModel.getNetworkStatus().observe(this) {
+            when (it) {
+                NetworkStatus.Available -> {
+                    //do nothing
+                }
+                NetworkStatus.Unavailable -> {
+                    showSnackbarNoInternet(binding.container)
                 }
             }
         }

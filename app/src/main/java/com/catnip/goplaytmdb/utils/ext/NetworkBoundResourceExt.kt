@@ -12,8 +12,8 @@ Github : https://github.com/hermasyp
 
 inline fun <ResultType, RequestType> localFirstNetworkResource(
     crossinline query: suspend () -> Flow<ResultType>,
-    crossinline fetch: suspend () -> RequestType,
-    crossinline saveFetchResult: suspend (RequestType) -> Unit,
+    crossinline fetch: suspend () -> Flow<RequestType>,
+    crossinline saveFetchResult: suspend (Flow<RequestType>) -> Unit,
     crossinline shouldFetch: (ResultType) -> Boolean = { true }
 ) = flow {
 
@@ -24,7 +24,7 @@ inline fun <ResultType, RequestType> localFirstNetworkResource(
             saveFetchResult(fetch())
             query().map { DataResource.Success(it) }
         } catch (throwable: Throwable) {
-            if(throwable is NoInternetConnectionException) throw throwable
+            if (throwable is NoInternetConnectionException) throw throwable
             query().map { DataResource.Error(Exception(throwable), it) }
         }
     } else {

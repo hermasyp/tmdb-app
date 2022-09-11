@@ -12,6 +12,7 @@ import com.catnip.goplaytmdb.databinding.ActivityMovieSectionListBinding
 import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoBottomSheetDialog
 import com.catnip.goplaytmdb.presentation.ui.movielist.adapter.LoadingAdapter
 import com.catnip.goplaytmdb.presentation.ui.movielist.adapter.PagedMoviesAdapter
+import com.catnip.goplaytmdb.utils.NetworkStatus
 import com.catnip.goplaytmdb.utils.ext.getErrorMessage
 import com.catnip.goplaytmdb.utils.ext.withLoadStateAdapters
 import kotlinx.coroutines.flow.collectLatest
@@ -47,6 +48,20 @@ class MovieSectionListActivity :
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = sectionName
         enableHomeAsBack()
+    }
+
+    override fun observeData() {
+        super.observeData()
+        viewModel.getNetworkStatus().observe(this) {
+            when (it) {
+                NetworkStatus.Available -> {
+                    //do nothing
+                }
+                NetworkStatus.Unavailable -> {
+                    showSnackbarNoInternet(binding.root)
+                }
+            }
+        }
     }
 
     private fun fetchMovies() {

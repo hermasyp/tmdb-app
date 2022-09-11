@@ -16,6 +16,7 @@ import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsViewModel
 import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoViewModel
 import com.catnip.goplaytmdb.presentation.ui.movielist.MovieSectionListViewModel
 import com.catnip.goplaytmdb.presentation.ui.mylist.MyListViewModel
+import com.catnip.goplaytmdb.utils.NetworkStatusTracker
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -74,6 +75,7 @@ object AppModules {
 
     private val common = module {
         single { Gson() }
+        single { NetworkStatusTracker(androidContext()) }
     }
 
 

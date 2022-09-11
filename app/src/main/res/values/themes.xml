@@ -26,6 +26,7 @@
         <item name="colorControlNormal">@color/white</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
+        <item name="snackbarStyle">@style/AppSnackbarStyle</item>
     </style>
     <style name="Goplaytmdb.NoActionBar" parent="Theme.Goplaytmdb">
         <item name="windowActionBar">false</item>
@@ -39,5 +40,9 @@
 
     <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/bg_bottom_sheet</item>
+    </style>
+
+    <style name="AppSnackbarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:background">@color/color_primary</item>
     </style>
 </resources>

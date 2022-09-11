@@ -9,10 +9,7 @@ import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 import com.catnip.goplaytmdb.presentation.model.HomeViewType
 import com.catnip.goplaytmdb.utils.mapper.ListMapper
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -42,6 +39,8 @@ class GetMovieListBySectionUseCase(
                     is DataResource.Error -> ViewResource.Error(it.exception)
                     is DataResource.Loading -> ViewResource.Loading()
                 }
+            }.catch {
+                emit(ViewResource.Error(it as Exception))
             }
         } ?: throw IllegalStateException("Param Required")
     }

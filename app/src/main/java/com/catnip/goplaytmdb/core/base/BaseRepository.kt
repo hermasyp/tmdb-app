@@ -18,7 +18,7 @@ open class BaseRepository {
             DataResource.Success(apiCall.invoke())
         } catch (throwable: Throwable) {
             when (throwable) {
-                is IOException -> DataResource.Error(NoInternetConnectionException())
+                is IOException -> throw NoInternetConnectionException()
                 is HttpException -> {
                     DataResource.Error(ApiErrorException(throwable.message(), throwable.code()))
                 }
