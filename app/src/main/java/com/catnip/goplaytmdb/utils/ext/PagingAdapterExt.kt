@@ -1,6 +1,7 @@
 package com.catnip.goplaytmdb.utils.ext
 
-import androidx.paging.*
+import androidx.paging.LoadStateAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 

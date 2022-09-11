@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.catnip.goplaytmdb.R
 import com.catnip.goplaytmdb.core.base.BaseFragment
 import com.catnip.goplaytmdb.databinding.FragmentMyListBinding
-import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.MovieAdapter
+import com.catnip.goplaytmdb.presentation.common.adapter.MovieAdapter
 import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoBottomSheetDialog
 import com.catnip.goplaytmdb.utils.ext.subscribe
 import org.koin.android.ext.android.inject
@@ -50,7 +50,7 @@ class MyListFragment :
                 doOnSuccess = { result ->
                     binding.pbMovies.isVisible = false
                     binding.rvMovies.isVisible = true
-                    binding.tVErrorMovies.isVisible = false
+                    binding.tvErrorMovies.isVisible = false
                     result.payload?.let { movies ->
                         if (movies.isNotEmpty()) {
                             movieAdapter.clearItems()
@@ -58,18 +58,18 @@ class MyListFragment :
                         }else{
                             movieAdapter.clearItems()
                             binding.rvMovies.isVisible = false
-                            binding.tVErrorMovies.isVisible = true
-                            binding.tVErrorMovies.text = requireContext().getString(R.string.text_movie_list_empty)
+                            binding.tvErrorMovies.isVisible = true
+                            binding.tvErrorMovies.text = requireContext().getString(R.string.text_movie_list_empty)
                         }
                     }
                 }, doOnError = {
                     binding.pbMovies.isVisible = false
                     binding.rvMovies.isVisible = false
-                    binding.tVErrorMovies.isVisible = true
+                    binding.tvErrorMovies.isVisible = true
                 }, doOnLoading = {
                     binding.pbMovies.isVisible = true
                     binding.rvMovies.isVisible = false
-                    binding.tVErrorMovies.isVisible = false
+                    binding.tvErrorMovies.isVisible = false
                 })
         }
     }

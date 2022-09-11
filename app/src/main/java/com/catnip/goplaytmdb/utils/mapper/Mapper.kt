@@ -1,4 +1,4 @@
-package com.catnip.ajaibpretest.utils.mapper
+package com.catnip.goplaytmdb.utils.mapper
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -7,15 +7,16 @@ Github : https://github.com/hermasyp
 
 interface Mapper<DTO,ViewParam>
 
-interface ViewParamMapper<DTO, ViewParam> : Mapper<DTO,ViewParam> {
+interface ViewParamMapper<DTO, ViewParam> : Mapper<DTO, ViewParam> {
     fun toViewParam(dataObject: DTO?): ViewParam
 }
 
-interface DataObjectMapper<DTO, ViewParam> : Mapper<DTO,ViewParam> {
+interface DataObjectMapper<DTO, ViewParam> : Mapper<DTO, ViewParam> {
     fun toDataObject(viewParam: ViewParam?): DTO
 }
 
-interface DataMapper<DTO, ViewParam> : ViewParamMapper<DTO, ViewParam>, DataObjectMapper<DTO, ViewParam>
+interface DataMapper<DTO, ViewParam> : ViewParamMapper<DTO, ViewParam>,
+    DataObjectMapper<DTO, ViewParam>
 
 class ListMapper<DTO, ViewParam>(private val mapper: Mapper<DTO, ViewParam>) {
     fun toDataObjects(viewParams: List<ViewParam>?): List<DTO> {

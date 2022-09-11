@@ -16,4 +16,5 @@
     <string name="text_share">Share</string>
     <string name="text_my_list">My List</string>
     <string name="text_movie_list_empty">Your Movie list is Empty</string>
+    <string name="text_button_retry">Retry</string>
 </resources>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.mylist.MyListFragment">
+    tools:context=".presentation.ui.movielist.MovieSectionListActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_movies"
@@ -16,23 +16,14 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:spanCount="3"
         tools:itemCount="15"
-        tools:listitem="@layout/item_movie_poster_grid" />
-
-    <ProgressBar
-        android:id="@+id/pb_movies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:visibility="visible" />
+        tools:listitem="@layout/item_movie_poster_grid"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_error_movies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
         android:gravity="center"
         android:textAlignment="center"
         android:visibility="gone"
@@ -40,13 +31,37 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        tools:text="@string/text_movie_list_empty" />
+        tools:drawableTop="@drawable/ic_error_no_connection"
+        tools:text="@string/text_movie_list_empty"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_retry_page"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:minHeight="40dp"
+        android:text="@string/text_button_retry"
+        android:textColor="@color/white_alpha_60"
+        app:cornerRadius="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_error_movies"
+        app:strokeColor="@color/white_alpha_60" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_error_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btn_retry_page,tv_error_movies" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/text_my_list" />
+        tools:title="@string/text_my_list" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

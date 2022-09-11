@@ -9,6 +9,7 @@
         android:id="@+id/shimmer_section"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        tools:visibility="gone"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,6 +41,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_section_layout"
         android:layout_width="match_parent"
@@ -48,14 +50,15 @@
 
         <TextView
             android:id="@+id/tv_title_section"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:alpha="0.8"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintRight_toLeftOf="@+id/iv_more"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Trending Now" />
@@ -74,5 +77,15 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_title_section"
             tools:itemCount="8"
             tools:listitem="@layout/item_movie_poster" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_more"
+            app:layout_constraintBottom_toTopOf="@+id/rv_contents"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

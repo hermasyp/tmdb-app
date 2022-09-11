@@ -14,6 +14,7 @@ import com.catnip.goplaytmdb.domain.usecases.*
 import com.catnip.goplaytmdb.presentation.ui.home.HomeViewModel
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.HomeFeedsViewModel
 import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoViewModel
+import com.catnip.goplaytmdb.presentation.ui.movielist.MovieSectionListViewModel
 import com.catnip.goplaytmdb.presentation.ui.mylist.MyListViewModel
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.google.gson.Gson
@@ -60,6 +61,7 @@ object AppModules {
         single { AddOrRemoveFavoriteMovieUseCase(get(), Dispatchers.IO) }
         single { CheckIsFilmFavoritedUseCase(get(), Dispatchers.IO) }
         single { GetFavoritedListMovieUseCase(get(), Dispatchers.IO) }
+        single { GetMovieListBySectionUseCase(get(), Dispatchers.IO) }
     }
 
     private val viewModel = module {
@@ -67,6 +69,7 @@ object AppModules {
         viewModelOf(::HomeViewModel)
         viewModelOf(::MyListViewModel)
         viewModelOf(::MovieInfoViewModel)
+        viewModelOf(::MovieSectionListViewModel)
     }
 
     private val common = module {

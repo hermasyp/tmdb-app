@@ -1,6 +1,6 @@
 package com.catnip.goplaytmdb.domain.mapper
 
-import com.catnip.ajaibpretest.utils.mapper.ViewParamMapper
+import com.catnip.goplaytmdb.utils.mapper.ViewParamMapper
 import com.catnip.goplaytmdb.data.network.model.response.MovieResponse
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 

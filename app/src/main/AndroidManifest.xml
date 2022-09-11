@@ -18,11 +18,16 @@
         android:theme="@style/Theme.Goplaytmdb"
         tools:targetApi="31">
         <activity
+            android:theme="@style/Goplaytmdb.NoActionBar"
+            android:name=".presentation.ui.movielist.MovieSectionListActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.home.HomeActivity"
             android:exported="true"
             android:theme="@style/Goplaytmdb.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

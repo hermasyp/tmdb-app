@@ -1,7 +1,7 @@
 package com.catnip.goplaytmdb.domain.usecases
 
 import androidx.annotation.StringRes
-import com.catnip.ajaibpretest.utils.mapper.ListMapper
+import com.catnip.goplaytmdb.utils.mapper.ListMapper
 import com.catnip.goplaytmdb.core.base.BaseUseCase
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.core.wrapper.ViewResource
@@ -31,6 +31,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
+                                    paramData.type,
                                     ListMapper(MovieResponseMapper).toViewParams(it.payload?.results),
                                     isLoading = true
                                 )
@@ -43,6 +44,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
+                                    paramData.type,
                                     ListMapper(MovieResponseMapper).toViewParams(it.payload?.results)
                                 )
                             )
@@ -55,6 +57,7 @@ class GetSectionDataUseCase(
                                 paramData.type,
                                 HomeUiModel.MovieSectionUIModel(
                                     paramData.sectionNameRes,
+                                    paramData.type,
                                     ListMapper(MovieResponseMapper).toViewParams(it.payload?.results),
                                     error = it.exception
                                 )

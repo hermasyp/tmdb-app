@@ -6,10 +6,11 @@ import com.catnip.goplaytmdb.core.base.BaseFragment
 import com.catnip.goplaytmdb.databinding.FragmentHomeBinding
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
-import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoBottomSheetDialog
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeFeedsAdapter
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeHeaderViewHolder
 import com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter.HomeSectionViewHolder
+import com.catnip.goplaytmdb.presentation.ui.movieinfo.MovieInfoBottomSheetDialog
+import com.catnip.goplaytmdb.presentation.ui.movielist.MovieSectionListActivity
 import com.catnip.goplaytmdb.utils.CommonUtils
 import com.catnip.goplaytmdb.utils.ext.subscribe
 import org.koin.android.ext.android.inject
@@ -20,10 +21,12 @@ class HomeFeedsFragment :
     override val viewModel: HomeFeedsViewModel by inject()
 
     private val homeAdapter: HomeFeedsAdapter by lazy {
-        HomeFeedsAdapter(headerClickListener = object : HomeHeaderViewHolder.HomeHeaderClickListener {
+        HomeFeedsAdapter(headerClickListener = object :
+            HomeHeaderViewHolder.HomeHeaderClickListener {
             override fun onShareClicked(movieViewParam: MovieViewParam) {
-                CommonUtils.shareFilm(requireContext(),movieViewParam)
+                CommonUtils.shareFilm(requireContext(), movieViewParam)
             }
+
             override fun onInfoClicked(movieViewParam: MovieViewParam) {
                 openMovieInfo(movieViewParam)
             }
@@ -34,7 +37,11 @@ class HomeFeedsFragment :
             }
 
             override fun onShowMoreClicked(section: HomeUiModel.MovieSectionUIModel) {
-                showOnDevelopmentToast()
+                MovieSectionListActivity.startActivity(
+                    requireContext(),
+                    getString(section.sectionNameRes),
+                    section.sectionType
+                )
             }
 
         }, recycledViewPool)
@@ -43,7 +50,6 @@ class HomeFeedsFragment :
     private val recycledViewPool: RecyclerView.RecycledViewPool by lazy {
         RecyclerView.RecycledViewPool()
     }
-
 
 
     override fun initView() {
@@ -68,12 +74,12 @@ class HomeFeedsFragment :
         }
     }
 
-    private fun handleFirstLoadError(){
+    private fun handleFirstLoadError() {
 
     }
 
-    private fun openMovieInfo(movieViewParam: MovieViewParam){
-        MovieInfoBottomSheetDialog(movieViewParam).show(childFragmentManager,null)
+    private fun openMovieInfo(movieViewParam: MovieViewParam) {
+        MovieInfoBottomSheetDialog(movieViewParam).show(childFragmentManager, null)
     }
 
     private fun initData() {

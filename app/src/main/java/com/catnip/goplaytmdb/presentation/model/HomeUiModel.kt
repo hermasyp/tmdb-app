@@ -20,6 +20,7 @@ sealed class HomeUiModel(
 
     class MovieSectionUIModel(
         @StringRes val sectionNameRes: Int,
+        val sectionType : String,
         val movies: List<MovieViewParam>? = null,
         isLoading: Boolean = false,
         error: Exception? = null

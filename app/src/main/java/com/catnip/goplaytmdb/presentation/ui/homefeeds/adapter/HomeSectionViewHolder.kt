@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.catnip.goplaytmdb.databinding.ItemSectionMovieBinding
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
+import com.catnip.goplaytmdb.presentation.common.adapter.MovieAdapter
 import com.catnip.goplaytmdb.presentation.model.HomeUiModel
 
 /**
@@ -69,7 +70,7 @@ class HomeSectionViewHolder(
     private fun bindMovie(item: HomeUiModel.MovieSectionUIModel) {
         item.movies?.let {
             binding.tvTitleSection.text = itemView.context.getString(item.sectionNameRes)
-            binding.tvTitleSection.setOnClickListener {
+            binding.ivMore.setOnClickListener {
                 listener.onShowMoreClicked(item)
             }
             binding.rvContents.apply {

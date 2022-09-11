@@ -1,4 +1,4 @@
-package com.catnip.goplaytmdb.presentation.ui.homefeeds.adapter
+package com.catnip.goplaytmdb.presentation.common.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,9 @@ import coil.load
 import com.catnip.goplaytmdb.databinding.ItemMoviePosterBinding
 import com.catnip.goplaytmdb.databinding.ItemMoviePosterGridBinding
 import com.catnip.goplaytmdb.domain.viewparam.MovieViewParam
+import com.catnip.goplaytmdb.presentation.common.adapter.viewholder.GridPosterViewHolderImpl
+import com.catnip.goplaytmdb.presentation.common.adapter.viewholder.PosterViewHolder
+import com.catnip.goplaytmdb.presentation.common.adapter.viewholder.PosterViewHolderImpl
 
 /**
 Written with love by Muhammad Hermas Yuda Pamungkas
@@ -63,35 +66,5 @@ class MovieAdapter(
     override fun getItemCount(): Int = items.size
 
 
-    interface PosterViewHolder {
-        fun bindView(item: MovieViewParam)
-    }
-
-    class PosterViewHolderImpl(
-        private val binding: ItemMoviePosterBinding,
-        val itemClick: (MovieViewParam) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root), PosterViewHolder {
-
-        override fun bindView(item: MovieViewParam) {
-            with(item) {
-                binding.ivPoster.load(item.getFullPosterPath())
-                itemView.setOnClickListener { itemClick(this) }
-            }
-        }
-    }
-
-    class GridPosterViewHolderImpl(
-        private val binding: ItemMoviePosterGridBinding,
-        val itemClick: (MovieViewParam) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root), PosterViewHolder {
-
-        override fun bindView(item: MovieViewParam) {
-            with(item) {
-                binding.ivPoster.load(item.getFullPosterPath())
-                itemView.setOnClickListener { itemClick(this) }
-            }
-
-        }
-    }
 
 }

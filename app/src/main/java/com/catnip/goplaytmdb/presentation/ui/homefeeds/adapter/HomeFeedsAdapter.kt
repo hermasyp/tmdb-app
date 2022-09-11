@@ -21,18 +21,22 @@ class HomeFeedsAdapter(
         HomeViewType.HEADER to HomeUiModel.HeaderSectionUiModel(isLoading = true),
         HomeViewType.SECTION_NOW_PLAYING to HomeUiModel.MovieSectionUIModel(
             sectionNameRes = R.string.title_section_now_playing,
+            sectionType = HomeViewType.SECTION_NOW_PLAYING,
             isLoading = true
         ),
         HomeViewType.SECTION_POPULAR to HomeUiModel.MovieSectionUIModel(
             sectionNameRes = R.string.title_section_popular,
+            sectionType = HomeViewType.SECTION_POPULAR,
             isLoading = true
         ),
         HomeViewType.SECTION_UPCOMING to HomeUiModel.MovieSectionUIModel(
             sectionNameRes = R.string.title_section_upcoming,
+            sectionType = HomeViewType.SECTION_UPCOMING,
             isLoading = true
         ),
         HomeViewType.SECTION_TOP_RATED to HomeUiModel.MovieSectionUIModel(
             sectionNameRes = R.string.title_section_top_rated,
+            sectionType = HomeViewType.SECTION_TOP_RATED,
             isLoading = true
         )
     )

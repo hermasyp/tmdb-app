@@ -1,6 +1,6 @@
 package com.catnip.goplaytmdb.domain.usecases
 
-import com.catnip.ajaibpretest.utils.mapper.ListMapper
+import com.catnip.goplaytmdb.utils.mapper.ListMapper
 import com.catnip.goplaytmdb.core.base.BaseUseCase
 import com.catnip.goplaytmdb.core.wrapper.DataResource
 import com.catnip.goplaytmdb.core.wrapper.ViewResource
