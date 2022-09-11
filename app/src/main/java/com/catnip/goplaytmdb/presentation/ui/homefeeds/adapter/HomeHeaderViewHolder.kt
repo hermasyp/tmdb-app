@@ -43,6 +43,8 @@ class HomeHeaderViewHolder(
             binding.shimmerHeader.stopShimmer()
             bindMovie(item.movie)
         } else {
+            binding.tvInfoHeader.isVisible = true
+            binding.tvShare.isVisible = true
             binding.shimmerHeader.stopShimmer()
             bindMovie(item.movie)
         }
@@ -50,8 +52,6 @@ class HomeHeaderViewHolder(
     }
     private fun bindMovie(movie : MovieViewParam?){
         movie?.let {
-            binding.tvInfoHeader.isVisible = true
-            binding.tvShare.isVisible = true
             binding.tvGenreMovie.text = movie.overview
             binding.ivHeaderMovie.load(movie.getFullPosterPath())
             binding.tvTitleMovie.text = movie.title

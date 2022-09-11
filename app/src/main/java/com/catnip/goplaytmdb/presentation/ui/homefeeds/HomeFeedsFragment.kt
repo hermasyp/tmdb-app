@@ -74,10 +74,6 @@ class HomeFeedsFragment :
         }
     }
 
-    private fun handleFirstLoadError() {
-
-    }
-
     private fun openMovieInfo(movieViewParam: MovieViewParam) {
         MovieInfoBottomSheetDialog(movieViewParam).show(childFragmentManager, null)
     }

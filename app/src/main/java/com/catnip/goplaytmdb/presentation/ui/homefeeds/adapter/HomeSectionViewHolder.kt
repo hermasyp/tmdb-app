@@ -47,16 +47,19 @@ class HomeSectionViewHolder(
             //showLoading
             binding.shimmerSection.startShimmer()
             binding.shimmerSection.isVisible = true
+            binding.ivMore.isVisible = false
             if(!item.movies.isNullOrEmpty()){
                 showMovie(item)
             }
         } else if (item.error != null) {
             binding.shimmerSection.stopShimmer()
             binding.shimmerSection.isVisible = false
+            binding.ivMore.isVisible = false
             if(!item.movies.isNullOrEmpty()){
                 showMovie(item)
             }
         } else {
+            binding.ivMore.isVisible = true
             showMovie(item)
         }
     }
@@ -69,6 +72,7 @@ class HomeSectionViewHolder(
 
     private fun bindMovie(item: HomeUiModel.MovieSectionUIModel) {
         item.movies?.let {
+            binding.ivMore.isVisible = it.isNotEmpty()
             binding.tvTitleSection.text = itemView.context.getString(item.sectionNameRes)
             binding.ivMore.setOnClickListener {
                 listener.onShowMoreClicked(item)
