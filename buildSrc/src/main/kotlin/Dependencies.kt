@@ -39,6 +39,7 @@ object Libraries {
         const val koin = "3.2.0"
         const val room = "2.4.3"
         const val shimmer = "0.5.0"
+        const val splashscreenApi = "1.0.0"
 
     }
     //android library
@@ -54,6 +55,8 @@ object Libraries {
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val googleAndroidMaterial =
         "com.google.android.material:material:${Versions.googleMaterial}"
+    const val splashscreenApi =
+        "androidx.core:core-splashscreen:${Versions.splashscreenApi}"
 
     //coroutine
     const val coroutineAndroid =
