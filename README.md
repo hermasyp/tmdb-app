@@ -1,5 +1,5 @@
 
-# Goplay Pretest ( TMDB API App )
+# TMDB API App
 
 A simple app to see Now Playing, Popular, Upcoming, Top Rated movies arround the world
 
